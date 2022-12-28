@@ -119,8 +119,10 @@ export const cartItemsSlice = createSlice({
         state.loading = false;
         state.error = null;
         const itemsArray: CartItem[] = [];
+        let newTotalQuantity: number = 0;
         if (action.payload) {
           for (let [key, value] of Object.entries(action.payload)) {
+            newTotalQuantity += value.quantity;
             itemsArray.push({
               title: value.title,
               id: value.id,
@@ -130,8 +132,10 @@ export const cartItemsSlice = createSlice({
             });
           }
           state.items = itemsArray;
+          state.totalQuantity = newTotalQuantity;
         } else {
           state.items = [];
+          state.totalQuantity = newTotalQuantity;
         }
         state.firstLoad = false;
       })

@@ -6,6 +6,7 @@ import {
   pushCartItems,
   removeCartItem,
 } from '../../store/cart-items-slice';
+import Card from '../UI/Card';
 
 const CartListItem: React.FC<{ item: CartItem }> = (props) => {
   const dispatch = useAppDispatch();
@@ -24,13 +25,15 @@ const CartListItem: React.FC<{ item: CartItem }> = (props) => {
   };
   return (
     <li>
-      <div>{props.item.title}</div>
-      <div>{props.item.totalPrice}</div>
-      <div>
-        {props.item.price} x {props.item.quantity}
-      </div>
-      <button onClick={addCartItemHandler}>+</button>
-      <button onClick={removeCartItemHandler}>-</button>
+      <Card>
+        <div>{props.item.title}</div>
+        <div>{props.item.totalPrice}</div>
+        <div>
+          {props.item.price} x {props.item.quantity}
+        </div>
+        <button onClick={addCartItemHandler}>+</button>
+        <button onClick={removeCartItemHandler}>-</button>
+      </Card>
     </li>
   );
 };

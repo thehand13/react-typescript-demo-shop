@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppSelector } from '../../../hooks/react-redux-hooks';
+import { useAppSelector } from '../../hooks/react-redux-hooks';
 import ShopListItem from './ShopListItem';
 
 const ShopItemsList: React.FC = () => {

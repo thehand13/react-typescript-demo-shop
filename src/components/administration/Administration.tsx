@@ -1,8 +1,9 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/react-redux-hooks';
 import { fetchShopItems } from '../../store/shop-items-slice';
 import AdministrationAddNewItem from './AdministrationAddNewItem';
 import AdministrationListItem from './AdministrationListItem';
+import Card from '../UI/Card';
 
 const Administration: React.FC = () => {
   const shopState = useAppSelector((state) => state.shop);
@@ -15,12 +16,10 @@ const Administration: React.FC = () => {
   const logoutHandler = () => {};
   return (
     <>
-      <nav>
-        <button onClick={logoutHandler}>Logout and return to the shop</button>
-      </nav>
-      <section>
+      <Card>
         <AdministrationAddNewItem />
-      </section>
+      </Card>
+
       <section>
         <ul>
           {shopState.items &&

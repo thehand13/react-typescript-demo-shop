@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/react-redux-hooks';
 import { pushCartItems, fetchCartItems } from '../../store/cart-items-slice';
 import { fetchShopItems } from '../../store/shop-items-slice';
-import ShopItemsList from './ItemsList/ShopItemsList';
+import ShopItemsList from './ShopItemsList';
+import classes from './Shop.module.css';
 
 const Shop: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -18,10 +19,10 @@ const Shop: React.FC = () => {
     dispatch(fetchShopItems());
   }, [dispatch]);
   return (
-    <>
-      <div>Shop</div>
+    <section className={classes.shop}>
+      <h2>Shop</h2>
       <ShopItemsList />
-    </>
+    </section>
   );
 };
 
