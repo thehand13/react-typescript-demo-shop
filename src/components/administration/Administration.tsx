@@ -4,6 +4,7 @@ import { fetchShopItems } from '../../store/shop-items-slice';
 import AdministrationAddNewItem from './AdministrationAddNewItem';
 import AdministrationListItem from './AdministrationListItem';
 import Card from '../UI/Card';
+import classes from './Administration.module.css';
 
 const Administration: React.FC = () => {
   const shopState = useAppSelector((state) => state.shop);
@@ -15,20 +16,18 @@ const Administration: React.FC = () => {
 
   const logoutHandler = () => {};
   return (
-    <>
+    <section className={classes.admin}>
       <Card>
         <AdministrationAddNewItem />
       </Card>
 
-      <section>
-        <ul>
-          {shopState.items &&
-            shopState.items.map((item) => (
-              <AdministrationListItem key={item.id} item={item} />
-            ))}
-        </ul>
-      </section>
-    </>
+      <ul>
+        {shopState.items &&
+          shopState.items.map((item) => (
+            <AdministrationListItem key={item.id} item={item} />
+          ))}
+      </ul>
+    </section>
   );
 };
 

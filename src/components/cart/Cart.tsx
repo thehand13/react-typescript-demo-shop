@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/react-redux-hooks';
 import { fetchCartItems, pushCartItems } from '../../store/cart-items-slice';
 import CartList from './CartList';
+import classes from './Cart.module.css';
 
 const Cart: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -14,9 +15,10 @@ const Cart: React.FC = () => {
     }
   }, [dispatch, cartState.itemsWereChanged]);
   return (
-    <div>
+    <section className={classes.cart}>
+      <h2>Cart</h2>
       <CartList />
-    </div>
+    </section>
   );
 };
 

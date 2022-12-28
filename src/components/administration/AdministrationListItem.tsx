@@ -4,6 +4,8 @@ import { useAppDispatch } from '../../hooks/react-redux-hooks';
 import { ShopItem } from '../../store/shop-items-slice';
 import { removeShopItem } from '../../store/shop-items-slice';
 import Card from '../UI/Card';
+import classes from './AdministrationListItem.module.css';
+
 const AdministrationListItem: React.FC<{ item: ShopItem }> = (props) => {
   const dispatch = useAppDispatch();
 
@@ -11,11 +13,12 @@ const AdministrationListItem: React.FC<{ item: ShopItem }> = (props) => {
     dispatch(removeShopItem(props.item.id));
   };
   return (
-    <li>
+    <li className={classes.item}>
       <Card>
-        <div>{props.item.title}</div>
-        <div>{props.item.price}</div>
-        <div>{props.item.description}</div>
+        <p>Title: {props.item.title}</p>
+        <p>Price: ${props.item.price.toFixed(2)}</p>
+        <p>Description: {props.item.description}</p>
+        <p>Id: {props.item.id}</p>
         <button onClick={deleteHandler}>Delete Item</button>
       </Card>
     </li>

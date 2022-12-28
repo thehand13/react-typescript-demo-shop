@@ -8,7 +8,6 @@ import classes from './Header.module.css';
 const Header: React.FC = () => {
   const authState = useAppSelector((state) => state.auth);
   const cartState = useAppSelector((state) => state.cart);
-  console.log(cartState.totalQuantity);
 
   return (
     <header className={classes.header}>

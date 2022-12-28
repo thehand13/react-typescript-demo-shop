@@ -23,8 +23,8 @@ button {
 
 .badge {
   margin-left: 1rem;
-  background-color: #1a8ed1;
+  background-color: white;
   border-radius: 30px;
   padding: 0.15rem 1.25rem;
-  color: #1d1d1d;
+  color: #1a8ed1;
 }

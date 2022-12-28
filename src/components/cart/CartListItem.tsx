@@ -3,10 +3,10 @@ import { useAppDispatch } from '../../hooks/react-redux-hooks';
 import {
   addCartItem,
   CartItem,
-  pushCartItems,
   removeCartItem,
 } from '../../store/cart-items-slice';
 import Card from '../UI/Card';
+import classes from './CartListItem.module.css';
 
 const CartListItem: React.FC<{ item: CartItem }> = (props) => {
   const dispatch = useAppDispatch();
@@ -24,15 +24,26 @@ const CartListItem: React.FC<{ item: CartItem }> = (props) => {
     dispatch(removeCartItem(props.item.id));
   };
   return (
-    <li>
+    <li className={classes.item}>
       <Card>
-        <div>{props.item.title}</div>
-        <div>{props.item.totalPrice}</div>
-        <div>
-          {props.item.price} x {props.item.quantity}
+        <header>
+          <h3>{props.item.title}</h3>
+          <div className={classes.price}>
+            ${(props.item.price * props.item.quantity).toFixed(2)}{' '}
+            <span className={classes.itemprice}>
+              (${props.item.price.toFixed(2)}/item)
+            </span>
+          </div>
+        </header>
+        <div className={classes.details}>
+          <div className={classes.quantity}>
+            x <span>{props.item.quantity}</span>
+          </div>
+          <div className={classes.actions}>
+            <button onClick={removeCartItemHandler}>-</button>
+            <button onClick={addCartItemHandler}>+</button>
+          </div>
         </div>
-        <button onClick={addCartItemHandler}>+</button>
-        <button onClick={removeCartItemHandler}>-</button>
       </Card>
     </li>
   );
