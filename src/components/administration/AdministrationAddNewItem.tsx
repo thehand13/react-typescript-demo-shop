@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAppDispatch } from '../../hooks/react-redux-hooks';
 import { addShopItem } from '../../store/shop-items-slice';
+import classes from './AdministrationAddNewItem.module.css';
 
 const AdministrationAddNewItem: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -15,7 +16,7 @@ const AdministrationAddNewItem: React.FC = () => {
   const onPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPriceState(event.target.value);
   };
-  const onDescriptionChange = (event: any) => {
+  const onDescriptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDescriptionState(event.target.value);
   };
 
@@ -39,21 +40,19 @@ const AdministrationAddNewItem: React.FC = () => {
     }
   };
   return (
-    <>
-      <form onSubmit={addItemHandler}>
-        <label>Title</label>
-        <input onChange={onTitleChange} type="text" value={titleState} />
-        <label>Price</label>
-        <input onChange={onPriceChange} type="text" value={priceState} />
-        <label>Description</label>
-        <input
-          onChange={onDescriptionChange}
-          type="text"
-          value={descriptionState}
-        />
-        <button>Add New Item</button>
-      </form>
-    </>
+    <form className={classes['add-item']} onSubmit={addItemHandler}>
+      <label htmlFor="Title">Title</label>
+      <input onChange={onTitleChange} type="text" value={titleState} />
+      <label htmlFor="Price">Price</label>
+      <input onChange={onPriceChange} type="number" value={priceState} />
+      <label htmlFor="Description">Description</label>
+      <input
+        onChange={onDescriptionChange}
+        type="text"
+        value={descriptionState}
+      />
+      <button>Add New Item</button>
+    </form>
   );
 };
 
