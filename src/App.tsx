@@ -8,9 +8,12 @@ import NotFound from './components/not-found/NotFound';
 import MainLayout from './layouts/MainLayout';
 import { useAppSelector, useAppDispatch } from './hooks/react-redux-hooks';
 import { fetchCartItems, pushCartItems } from './store/cart-items-slice';
+import LoginModal from './components/auth/LoginModal';
 
 function App() {
   const dispatch = useAppDispatch();
+  const uiState = useAppSelector((state) => state.ui);
+
   const cartState = useAppSelector((state) => state.cart);
   useEffect(() => {
     if (cartState.firstLoad) {
@@ -21,6 +24,7 @@ function App() {
   }, [dispatch, cartState.itemsWereChanged]);
   return (
     <>
+      {uiState.loginModalisShown && <LoginModal />}
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Shop />} />

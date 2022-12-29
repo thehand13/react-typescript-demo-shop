@@ -1,11 +1,16 @@
 import React from 'react';
-import { useAppSelector } from '../../hooks/react-redux-hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/react-redux-hooks';
+import { showLoginModal } from '../../store/ui-slice';
 
 import classes from './AuthButton.module.css';
 
 const AuthButton: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const authState = useAppSelector((state) => state.auth);
-  const loginHandler = () => {};
+  const loginHandler = () => {
+    dispatch(showLoginModal());
+  };
   const logoutHandler = () => {};
   return (
     <>

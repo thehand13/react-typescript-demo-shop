@@ -6,8 +6,8 @@ type LoginState = {
 };
 
 const initialState: LoginState = {
-  loggedIn: true,
-  loggedAsAdmin: true,
+  loggedIn: false,
+  loggedAsAdmin: false,
 };
 
 export const fetchAuthStatus = createAsyncThunk(
