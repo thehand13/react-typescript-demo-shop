@@ -13,10 +13,32 @@
 
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-    <title>React App</title>
+    <title>React Test Shop</title>
   </head>
   <body>
     <div id="modal-root"></div>
     <div id="root"></div>
+    <script type="module">
+      // FIREBASE LOGIN
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js';
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: 'AIzaSyA4ufg4-Af6TL_4mnvfLQ0e8v8b8YYFNG8',
+        authDomain: 'react-ts-demo-shop.firebaseapp.com',
+        databaseURL:
+          'https://react-ts-demo-shop-default-rtdb.europe-west1.firebasedatabase.app',
+        projectId: 'react-ts-demo-shop',
+        storageBucket: 'react-ts-demo-shop.appspot.com',
+        messagingSenderId: '198371145835',
+        appId: '1:198371145835:web:f2c63d1421bf1dedded92e',
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+    </script>
   </body>
 </html>

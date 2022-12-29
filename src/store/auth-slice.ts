@@ -2,12 +2,12 @@ import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 
 type LoginState = {
   loggedIn: boolean;
-  loggedAsAdmin: boolean;
+  authToken: string | null;
 };
 
 const initialState: LoginState = {
   loggedIn: false,
-  loggedAsAdmin: false,
+  authToken: null,
 };
 
 export const fetchAuthStatus = createAsyncThunk(
@@ -25,17 +25,13 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setAuth(
-      state,
-      action: PayloadAction<{ passwordIsTrue: boolean; isAdmin: boolean }>
-    ) {},
-    login(
-      state,
-      action: PayloadAction<{ passwordIsTrue: boolean; isAdmin: boolean }>
-    ) {},
+    login(state, action: PayloadAction<{ fetchedAuthToken: string }>) {
+      state.loggedIn = true;
+      state.authToken = action.payload.fetchedAuthToken;
+    },
     logout(state) {
       state.loggedIn = false;
-      state.loggedAsAdmin = false;
+      state.authToken = null;
     },
   },
   extraReducers: (builder) => {
@@ -43,5 +39,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setAuth, login, logout } = authSlice.actions;
+export const { login, logout } = authSlice.actions;
 export const authReducer = authSlice.reducer;

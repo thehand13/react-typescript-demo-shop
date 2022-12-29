@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import { authReducer } from './auth-slice';
 import { cartItemsReducer } from './cart-items-slice';
 import { shopItemsReducer } from './shop-items-slice';
