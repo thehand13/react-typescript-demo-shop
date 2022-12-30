@@ -48,11 +48,12 @@ export const addShopItem = createAsyncThunk<
     title: string;
     price: number;
     description: string;
+    authToken: string;
   },
   { rejectValue: string }
 >('shop/addShopItem', async function (item, { rejectWithValue }) {
   const response = await fetch(
-    'https://react-ts-demo-shop-default-rtdb.europe-west1.firebasedatabase.app/shop-items.json',
+    `https://react-ts-demo-shop-default-rtdb.europe-west1.firebasedatabase.app/shop-items.json?auth=${item.authToken}`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -69,23 +70,26 @@ export const addShopItem = createAsyncThunk<
 
 export const removeShopItem = createAsyncThunk<
   string,
-  string,
+  { id: string; authToken: string },
   { rejectValue: string }
->('shop/removeShopItem', async function (id, { rejectWithValue }) {
-  const response = await fetch(
-    `https://react-ts-demo-shop-default-rtdb.europe-west1.firebasedatabase.app/shop-items/${id}.json`,
-    {
-      method: 'DELETE',
+>(
+  'shop/removeShopItem',
+  async function ({ id, authToken }, { rejectWithValue }) {
+    const response = await fetch(
+      `https://react-ts-demo-shop-default-rtdb.europe-west1.firebasedatabase.app/shop-items/${id}.json?auth=${authToken}`,
+      {
+        method: 'DELETE',
+      }
+    );
+
+    if (!response.ok) {
+      return rejectWithValue('Can`t remove item from the shop');
     }
-  );
 
-  if (!response.ok) {
-    return rejectWithValue('Can`t remove item from the shop');
+    const responseData = await response.json();
+    return responseData;
   }
-
-  const responseData = await response.json();
-  return responseData;
-});
+);
 
 export const shopItemsSlice = createSlice({
   name: 'shop',

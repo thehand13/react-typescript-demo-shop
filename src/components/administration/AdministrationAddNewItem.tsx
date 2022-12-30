@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useAppDispatch } from '../../hooks/react-redux-hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/react-redux-hooks';
 import { addShopItem } from '../../store/shop-items-slice';
 import classes from './AdministrationAddNewItem.module.css';
 
 const AdministrationAddNewItem: React.FC = () => {
   const dispatch = useAppDispatch();
+  const authState = useAppSelector((state) => state.auth);
 
   const [titleState, setTitleState] = useState('');
   const [priceState, setPriceState] = useState('');
@@ -32,6 +33,7 @@ const AdministrationAddNewItem: React.FC = () => {
           title: titleState,
           price: +priceState,
           description: descriptionState,
+          authToken: authState.idToken,
         })
       );
       setTitleState('');
