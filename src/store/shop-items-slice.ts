@@ -53,7 +53,7 @@ export const addShopItem = createAsyncThunk<
   { rejectValue: string }
 >('shop/addShopItem', async function (item, { rejectWithValue }) {
   const response = await fetch(
-    `https://react-ts-demo-shop-default-rtdb.europe-west1.firebasedatabase.app/shop-items.json?auth=${item.authToken}`,
+    `https://react-ts-demo-shop-default-rtdb.europe-west1.firebasedatabase.app/shop-items.json`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -76,7 +76,7 @@ export const removeShopItem = createAsyncThunk<
   'shop/removeShopItem',
   async function ({ id, authToken }, { rejectWithValue }) {
     const response = await fetch(
-      `https://react-ts-demo-shop-default-rtdb.europe-west1.firebasedatabase.app/shop-items/${id}.json?auth=${authToken}`,
+      `https://react-ts-demo-shop-default-rtdb.europe-west1.firebasedatabase.app/shop-items/${id}.json`,
       {
         method: 'DELETE',
       }
