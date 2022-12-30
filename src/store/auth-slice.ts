@@ -1,43 +1,55 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type LoginState = {
+interface LoginState {
   loggedIn: boolean;
-  authToken: string | null;
-};
+  isAdmin: boolean;
+  authToken: string;
+  idToken: string;
+  email: string;
+}
+
+const adminEmailsArray: string[] = ['admin@reacttestshop.com'];
 
 const initialState: LoginState = {
   loggedIn: false,
-  authToken: null,
+  isAdmin: false,
+  authToken: '',
+  idToken: '',
+  email: '',
 };
-
-export const fetchAuthStatus = createAsyncThunk(
-  'auth/fetchAuthStatus',
-  async function () {
-    const response = await fetch(
-      'https://react-ts-demo-shop-default-rtdb.europe-west1.firebasedatabase.app/auth.json'
-    );
-    const responseData = response.json();
-    return responseData;
-  }
-);
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    login(state, action: PayloadAction<{ fetchedAuthToken: string }>) {
+    loginUser(
+      state,
+      action: PayloadAction<{
+        fetchedAuthToken: string;
+        fetchedLocalId: string;
+        fetchedEmail: string;
+      }>
+    ) {
       state.loggedIn = true;
+      for (const email of adminEmailsArray) {
+        if (email === action.payload.fetchedEmail) {
+          state.isAdmin = true;
+          break;
+        }
+      }
       state.authToken = action.payload.fetchedAuthToken;
+      state.idToken = action.payload.fetchedLocalId;
+      state.email = action.payload.fetchedEmail;
     },
-    logout(state) {
+    logoutUser(state) {
       state.loggedIn = false;
-      state.authToken = null;
+      state.isAdmin = false;
+      state.authToken = '';
+      state.idToken = '';
+      state.email = '';
     },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(fetchAuthStatus.pending, () => {});
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { loginUser, logoutUser } = authSlice.actions;
 export const authReducer = authSlice.reducer;

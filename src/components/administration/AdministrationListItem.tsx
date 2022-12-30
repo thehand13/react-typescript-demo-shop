@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useAppDispatch } from '../../hooks/react-redux-hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/react-redux-hooks';
 import { ShopItem } from '../../store/shop-items-slice';
 import { removeShopItem } from '../../store/shop-items-slice';
 import Card from '../UI/Card';
@@ -8,9 +8,12 @@ import classes from './AdministrationListItem.module.css';
 
 const AdministrationListItem: React.FC<{ item: ShopItem }> = (props) => {
   const dispatch = useAppDispatch();
+  const authState = useAppSelector((state) => state.auth);
 
   const deleteHandler = () => {
-    dispatch(removeShopItem(props.item.id));
+    dispatch(
+      removeShopItem({ id: props.item.id, authToken: authState.authToken })
+    );
   };
   return (
     <li className={classes.item}>

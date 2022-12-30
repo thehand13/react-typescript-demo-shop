@@ -27,7 +27,7 @@ const Header: React.FC = () => {
         <Link to="/about">
           <button>About</button>
         </Link>
-        {authState.loggedIn && (
+        {authState.isAdmin && (
           <Link to="/admin">
             <button>Administration</button>
           </Link>

@@ -13,7 +13,7 @@ import LoginModal from './components/auth/LoginModal';
 function App() {
   const dispatch = useAppDispatch();
   const uiState = useAppSelector((state) => state.ui);
-
+  const authState = useAppSelector((state) => state.auth);
   const cartState = useAppSelector((state) => state.cart);
   useEffect(() => {
     if (cartState.firstLoad) {
@@ -31,7 +31,9 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/admin" element={<Administration />} />
+          {authState.isAdmin && (
+            <Route path="/admin" element={<Administration />} />
+          )}
         </Route>
       </Routes>
     </>

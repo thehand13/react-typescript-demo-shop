@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/react-redux-hooks';
-import { logout } from '../../store/auth-slice';
+import { logoutUser } from '../../store/auth-slice';
 import { showLoginModal } from '../../store/ui-slice';
 
 import classes from './AuthButton.module.css';
@@ -13,7 +13,7 @@ const AuthButton: React.FC = () => {
     dispatch(showLoginModal());
   };
   const logoutHandler = () => {
-    dispatch(logout());
+    dispatch(logoutUser());
   };
   return (
     <>

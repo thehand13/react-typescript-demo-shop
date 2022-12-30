@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAppDispatch } from '../../hooks/react-redux-hooks';
-import { login } from '../../store/auth-slice';
+import { loginUser } from '../../store/auth-slice';
 import { hideLoginModal } from '../../store/ui-slice';
 import Card from '../UI/Card';
 import Modal from '../UI/Modal';
@@ -63,7 +63,13 @@ const LoginModal: React.FC = () => {
         }
       })
       .then((responseData) => {
-        dispatch(login(responseData.idToken));
+        dispatch(
+          loginUser({
+            fetchedAuthToken: responseData.idToken,
+            fetchedLocalId: responseData.localId,
+            fetchedEmail: emailState,
+          })
+        );
         setEmailState('');
         setPasswordState('');
         setIsLogin(true);
