@@ -53,7 +53,7 @@ export const addShopItem = createAsyncThunk<
   { rejectValue: string }
 >('shop/addShopItem', async function (item, { rejectWithValue }) {
   const response = await fetch(
-    `https://react-ts-demo-shop-default-rtdb.europe-west1.firebasedatabase.app/shop-items.json`,
+    'https://react-ts-demo-shop-default-rtdb.europe-west1.firebasedatabase.app/shop-items.json',
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -74,7 +74,7 @@ export const removeShopItem = createAsyncThunk<
   { rejectValue: string }
 >(
   'shop/removeShopItem',
-  async function ({ id, authToken }, { rejectWithValue }) {
+  async function ({ id }, { rejectWithValue }) {
     const response = await fetch(
       `https://react-ts-demo-shop-default-rtdb.europe-west1.firebasedatabase.app/shop-items/${id}.json`,
       {
@@ -106,7 +106,7 @@ export const shopItemsSlice = createSlice({
         state.error = null;
         const itemsArray: ShopItem[] = [];
         if (action.payload) {
-          for (let [key, value] of Object.entries(action.payload)) {
+          for (const [key, value] of Object.entries(action.payload)) {
             itemsArray.push({
               title: value.title,
               price: value.price,
@@ -122,7 +122,7 @@ export const shopItemsSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(addShopItem.fulfilled, (state, action) => {
+      .addCase(addShopItem.fulfilled, (state) => {
         state.itemsWereChanged = true;
         state.loading = false;
         state.error = null;

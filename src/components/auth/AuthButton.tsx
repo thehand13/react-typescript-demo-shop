@@ -18,12 +18,12 @@ const AuthButton: React.FC = () => {
   return (
     <>
       {!authState.loggedIn && (
-        <button className={classes[`auth-button`]} onClick={loginHandler}>
+        <button className={classes['auth-button']} onClick={loginHandler}>
           Login
         </button>
       )}
       {authState.loggedIn && (
-        <button className={classes[`auth-button`]} onClick={logoutHandler}>
+        <button className={classes['auth-button']} onClick={logoutHandler}>
           Logout
         </button>
       )}

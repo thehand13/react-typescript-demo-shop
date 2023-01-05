@@ -119,9 +119,9 @@ export const cartItemsSlice = createSlice({
         state.loading = false;
         state.error = null;
         const itemsArray: CartItem[] = [];
-        let newTotalQuantity: number = 0;
+        let newTotalQuantity = 0;
         if (action.payload) {
-          for (let [key, value] of Object.entries(action.payload)) {
+          for (const [, value] of Object.entries(action.payload)) {
             newTotalQuantity += value.quantity;
             itemsArray.push({
               title: value.title,
