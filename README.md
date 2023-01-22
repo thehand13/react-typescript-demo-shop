@@ -1,9 +1,9 @@
-###REACT TYPESCRIPT DEMO SHOP
+### REACT TYPESCRIPT DEMO SHOP
 Install dependencies:
 
-##npm install
+## npm install
 Start in developer mode:
 
-##npm start
+## npm start
 
 This app allows you to create account/log in with existing account, add/remove products to/from the cart, add/remove products to/from the shop database (admin only)
