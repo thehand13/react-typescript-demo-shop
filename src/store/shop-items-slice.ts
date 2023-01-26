@@ -72,24 +72,21 @@ export const removeShopItem = createAsyncThunk<
   string,
   { id: string; authToken: string },
   { rejectValue: string }
->(
-  'shop/removeShopItem',
-  async function ({ id }, { rejectWithValue }) {
-    const response = await fetch(
-      `https://react-ts-demo-shop-default-rtdb.europe-west1.firebasedatabase.app/shop-items/${id}.json`,
-      {
-        method: 'DELETE',
-      }
-    );
-
-    if (!response.ok) {
-      return rejectWithValue('Can`t remove item from the shop');
+>('shop/removeShopItem', async function ({ id }, { rejectWithValue }) {
+  const response = await fetch(
+    `https://react-ts-demo-shop-default-rtdb.europe-west1.firebasedatabase.app/shop-items/${id}.json`,
+    {
+      method: 'DELETE',
     }
+  );
 
-    const responseData = await response.json();
-    return responseData;
+  if (!response.ok) {
+    return rejectWithValue('Can`t remove item from the shop');
   }
-);
+
+  const responseData = await response.json();
+  return responseData;
+});
 
 export const shopItemsSlice = createSlice({
   name: 'shop',
@@ -131,11 +128,10 @@ export const shopItemsSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(removeShopItem.fulfilled, (state, action) => {
+      .addCase(removeShopItem.fulfilled, (state) => {
         state.itemsWereChanged = true;
         state.loading = false;
         state.error = null;
-        console.log(action.payload);
       })
       .addMatcher(isError, (state, action: PayloadAction<string>) => {
         state.loading = false;

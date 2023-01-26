@@ -14,7 +14,6 @@ const Administration: React.FC = () => {
     dispatch(fetchShopItems());
   }, [dispatch, shopState.itemsWereChanged]);
 
-  
   return (
     <section className={classes.admin}>
       <Card>
